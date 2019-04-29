@@ -19,7 +19,7 @@ From the python project's root folder, run:
 $ pipenv shell
 ```
 
-### 3. install all requirements in the Pipfile, including dev requirements
+### 3. Install all requirements in the Pipfile, including dev requirements
 
 ```
 $ pipenv install --dev --sequential
