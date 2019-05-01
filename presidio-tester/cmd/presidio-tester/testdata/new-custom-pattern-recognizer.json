@@ -13,6 +13,8 @@
                 "regex": "\\W*(projectile)\\W*",
                 "score": 1
             }
-        ]
+        ],
+        "blacklist": ["Tilim"],
+        "contextPhrases": ["fired", "launched"]
     }
 }
