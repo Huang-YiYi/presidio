@@ -4,8 +4,8 @@ LDFLAGS            :=
 
 BINS        = presidio-anonymizer presidio-ocr presidio-anonymizer-image presidio-api presidio-scheduler presidio-datasink presidio-collector presidio-recognizers-store
 IMAGES      = presidio-anonymizer presidio-ocr presidio-anonymizer-image presidio-api presidio-scheduler presidio-datasink presidio-collector presidio-analyzer presidio-recognizers-store
-GOLANG_DEPS	= presidio-golang-deps-beta
-PYTHON_DEPS	= presidio-python-deps-beta
+GOLANG_DEPS	= presidio-golang-deps
+PYTHON_DEPS	= presidio-python-deps
 GOLANG_BASE	= presidio-golang-base
 
 GIT_TAG   = $(shell git describe --tags --always 2>/dev/null)
