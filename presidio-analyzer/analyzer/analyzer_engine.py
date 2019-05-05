@@ -1,7 +1,8 @@
 import logging
 import os
 
-from analyzer.proto import analyze_pb2_grpc, analyze_pb2, common_pb2
+from analyzer.proto import analyze_pb2_grpc, analyze_pb2
+from analyzer.proto.common_pb2 import AnalyzeResult
 from analyzer.recognizer_registry import RecognizerRegistry
 from analyzer.nlp_engine import SpacyNlpEngine
 
@@ -141,7 +142,7 @@ class AnalyzerEngine(analyze_pb2_grpc.AnalyzeServiceServicer):
     def __convert_results_to_proto(results):
         proto_results = []
         for result in results:
-            res = common_pb2.AnalyzeResult()
+            res = AnalyzeResult()
             # pylint: disable=no-member
             res.field.name = result.entity_type
             res.score = result.score

@@ -15,7 +15,8 @@ from knack.help_files import helps
 
 # bug #602: Fix imports issue in python
 from analyzer import AnalyzerEngine
-from analyzer.proto import analyze_pb2_grpc, analyze_pb2
+from analyzer.proto import analyze_pb2_grpc
+from analyzer.proto.analyze_pb2 import AnalyzeRequest
 
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 
@@ -87,7 +88,7 @@ def analyze_command_handler(text, fields, env_grpc_port=False, grpc_port=3001):
 
     channel = grpc.insecure_channel('localhost:' + str(grpc_port))
     stub = analyze_pb2_grpc.AnalyzeServiceStub(channel)
-    request = analyze_pb2.AnalyzeRequest()
+    request = AnalyzeRequest()
     request.text = text
 
     # pylint: disable=no-member

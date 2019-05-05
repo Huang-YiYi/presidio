@@ -11,7 +11,7 @@ from analyzer.predefined_recognizers import CreditCardRecognizer, \
     UsPhoneRecognizer, DomainRecognizer, UsItinRecognizer, \
     IpRecognizer, UsSsnRecognizer, UsLicenseRecognizer, UsBankRecognizer, \
     UsPassportRecognizer
-from analyzer.proto import analyze_pb2
+from analyzer.proto.analyze_pb2 import AnalyzeRequest
 
 from analyzer.recognizer_registry import RecognizerRegistry, \
     RecognizerStoreApi
@@ -235,7 +235,7 @@ class TestAnalyzerEngine(TestCase):
         assert len(results) == 0
 
     def test_apply_with_language_returns_correct_response(self):
-        request = analyze_pb2.AnalyzeRequest()
+        request = AnalyzeRequest()
         request.analyzeTemplate.language = 'en'
         new_field = request.analyzeTemplate.fields.add()
         new_field.name = 'CREDIT_CARD'
@@ -246,7 +246,7 @@ class TestAnalyzerEngine(TestCase):
         assert response.analyzeResults is not None
 
     def test_apply_with_no_language_returns_default(self):
-        request = analyze_pb2.AnalyzeRequest()
+        request = AnalyzeRequest()
         request.analyzeTemplate.language = ''
         new_field = request.analyzeTemplate.fields.add()
         new_field.name = 'CREDIT_CARD'
@@ -257,7 +257,7 @@ class TestAnalyzerEngine(TestCase):
 
     def test_when_allFields_is_true_return_all_fields(self):
         analyze_engine = AnalyzerEngine(MockRecognizerRegistry())
-        request = analyze_pb2.AnalyzeRequest()
+        request = AnalyzeRequest()
         request.analyzeTemplate.allFields = True
         request.text = " Credit card: 4095-2609-9393-4932,  my phone is 425 " \
                        "8829090 " \
@@ -274,7 +274,7 @@ class TestAnalyzerEngine(TestCase):
     def test_when_allFields_is_true_full_recognizers_list_return_all_fields(
         self):
         analyze_engine = AnalyzerEngine(RecognizerRegistry())
-        request = analyze_pb2.AnalyzeRequest()
+        request = AnalyzeRequest()
         request.analyzeTemplate.allFields = True
         request.text = "My name is David and I live in Seattle." \
                        "Domain: microsoft.com "
@@ -288,7 +288,7 @@ class TestAnalyzerEngine(TestCase):
 
     def test_when_allFields_is_true_and_entities_not_empty_exception(self):
         analyze_engine = AnalyzerEngine(registry=RecognizerRegistry())
-        request = analyze_pb2.AnalyzeRequest()
+        request = AnalyzeRequest()
         request.text = "My name is David and I live in Seattle." \
                        "Domain: microsoft.com "
         request.analyzeTemplate.allFields = True
