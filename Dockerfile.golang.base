@@ -1,6 +1,6 @@
 ARG REGISTRY=presidio.azurecr.io
 
-FROM ${REGISTRY}/presidio-golang-deps
+FROM ${REGISTRY}/presidio-golang-deps-beta
 
 WORKDIR $GOPATH/src/github.com/Microsoft/presidio
 ADD . $GOPATH/src/github.com/Microsoft/presidio
