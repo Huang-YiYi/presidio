@@ -33,14 +33,8 @@ class AnalyzerEngine(analyze_pb2_grpc.AnalyzeServiceServicer):
         results = self.analyze(request.text, entities, language,
                                request.analyzeTemplate.allFields)
 
-        # Create Analyze Response Object
-        response = analyze_pb2.AnalyzeResponse()
-
-        # pylint: disable=no-member
-        response.analyzeResults.extend(
-            AnalyzerEngine.__convert_results_to_proto(results))
         logging.info("Found %d results", len(results))
-        return response
+        return AnalyzerEngine.__convert_results_to_proto(results)
 
     @staticmethod
     def __remove_duplicates(results):
@@ -140,6 +134,7 @@ class AnalyzerEngine(analyze_pb2_grpc.AnalyzeServiceServicer):
 
     @staticmethod
     def __convert_results_to_proto(results):
+        response = analyze_pb2.AnalyzeResponse()
         proto_results = []
         for result in results:
             res = AnalyzeResult()
@@ -152,4 +147,5 @@ class AnalyzerEngine(analyze_pb2_grpc.AnalyzeServiceServicer):
             res.location.length = result.end - result.start
             proto_results.append(res)
 
-        return proto_results
+        response.analyzeResults.extend(proto_results)
+        return response
